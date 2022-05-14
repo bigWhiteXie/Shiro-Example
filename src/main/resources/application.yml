@@ -62,3 +62,5 @@ mybatis:
 shiro:
   ##shiro内置的登录认证校验的过滤器，校验后发现没有登录认证，跳转的资源地址
   loginUrl: /userController/login
+
+

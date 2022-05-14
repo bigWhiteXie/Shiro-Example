@@ -10,4 +10,6 @@ public interface UserService {
     List<String> getPermissionsService(String pricipal);
 
     User selUserService(String uname);
+
+    List<User> selAllUserService();
 }

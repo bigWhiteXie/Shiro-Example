@@ -45,12 +45,12 @@ public class ShiroConfig {
         //4.集中设置securityManager
         securityManager.setRealm(myRealm);
         securityManager.setRememberMeManager(rememberMeManager());
-        securityManager.setCacheManager( ehCacheCacheManager());
+        securityManager.setCacheManager( ehCacheManager());
         return securityManager;
     }
 
     @Bean
-    public EhCacheManager ehCacheCacheManager(){
+    public EhCacheManager ehCacheManager(){
         //1.创建ehCacheManager
         EhCacheManager ehCacheManager = new EhCacheManager();
 

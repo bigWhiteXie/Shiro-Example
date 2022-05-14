@@ -8,14 +8,21 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.management.relation.RoleNotFoundException;
+
 @ControllerAdvice
 public class ExceptionController {
     @ResponseBody
-    @ExceptionHandler(UnauthorizedException.class)
+    @ExceptionHandler({UnauthorizedException.class})
     public String unauthorizedException(Exception e){
         return "无权限";
     }
 
+    @ResponseBody
+    @ExceptionHandler(value = {RoleNotFoundException.class})
+    public String roleNotFoundException(Exception e){
+        return "角色校验失败";
+    }
     @ResponseBody
     @ExceptionHandler(AuthorizationException.class)
     public String authorizationException(Exception e){

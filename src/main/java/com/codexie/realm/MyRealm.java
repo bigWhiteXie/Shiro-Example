@@ -37,7 +37,9 @@ public class MyRealm extends AuthorizingRealm {
         //2.根据身份获取、角色权限等信息
         List<String> roles = service.getRolesService(pricipal);
         List<String> permissions = service.getPermissionsService(pricipal);
-
+        System.out.println("用户："+pricipal);
+        System.out.println("角色："+roles);
+        System.out.println("权限："+permissions);
         //3.将角色、权限添加到授权信息里面
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addRoles(roles);

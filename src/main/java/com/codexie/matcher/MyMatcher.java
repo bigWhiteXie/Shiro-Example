@@ -27,9 +27,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MyMatcher extends HashedCredentialsMatcher {
     private Ehcache passwordEhcache;
 
-    public MyMatcher(EhCacheManager ehCacheCacheManager) {
-        Ehcache passwordRetryEhcache =  ehCacheCacheManager.getCacheManager().getEhcache("passwordRetryEhcache");
+    public MyMatcher(EhCacheManager ehCacheManager) {
+        Ehcache passwordRetryEhcache =  ehCacheManager.getCacheManager().getEhcache("passwordRetryEhcache");
         passwordEhcache =  passwordRetryEhcache;
+    }
+
+    public MyMatcher() {
+
     }
 
     @Override
@@ -65,4 +69,9 @@ public class MyMatcher extends HashedCredentialsMatcher {
         }
         return match;
     }
+
+//    public static void main(String[] args) {
+//        MyMatcher matcher = new MyMatcher();
+//
+//    }
 }

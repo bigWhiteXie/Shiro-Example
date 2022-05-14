@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.codexie.mapper.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.codexie.pojo.Permission">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="pdesc" jdbcType="VARCHAR" property="pdesc" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_permission
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.codexie.pojo.Permission">
+    insert into t_permission (pid, pname, pdesc
+      )
+    values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{pdesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.codexie.pojo.Permission">
+    update t_permission
+    set pname = #{pname,jdbcType=VARCHAR},
+      pdesc = #{pdesc,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select pid, pname, pdesc
+    from t_permission
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select pid, pname, pdesc
+    from t_permission
+  </select>
+</mapper>

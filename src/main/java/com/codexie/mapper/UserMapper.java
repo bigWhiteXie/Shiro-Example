@@ -6,27 +6,41 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface UserMapper {
-    @Select("select rname from t_role where rid in\n" +
-            "(\n" +
-            "\tselect DISTINCT rid from r_user where uid =\n" +
-            "\t(\n" +
-            "\tselect id from user where uname=#{param1}\n" +
-            "\t)\n" +
-            ")")
-    List<String> selRolesMapper(String pricipal);
+    int deleteByPrimaryKey(Integer id);
 
-    @Select("select pname from t_permission where pid in (\n" +
-            "\tselect pid from p_role where rid in (\n" +
-            "\t\tselect rid from t_role where rid in\n" +
-            "\t\t(\n" +
-            "\t\t\tselect DISTINCT rid from r_user where uid =\n" +
-            "\t\t\t(\n" +
-            "\t\t\tselect id from user where uname=#{param1}\n" +
-            "\t\t\t)\n" +
-            "\t\t))\n" +
-            ")\n")
-    List<String> selPsMapper(String pricipal);
+    int insert(User record);
+
+    User selectByPrimaryKey(Integer id);
 
     @Select("select * from user where uname=#{param1}")
     User selUserMapper(String uname);
+
+    @Select("select rname from t_role \n" +
+            "where\n" +
+            "\trid in (\n" +
+            "\t\tselect rid from r_user \n" +
+            "\t\twhere uid=\n" +
+            "\t\t\t(select id from user where uname=#{param1})\n" +
+            ")")
+    List<String> selRolesMapper(String pricipal);
+
+    @Select("select pname from t_permission\n" +
+            "\twhere pid in \n" +
+            "\t(select pid from p_role where\n" +
+            "\trid in \n" +
+            "\t(\n" +
+            "\t\tselect rid from t_role \n" +
+            "\t\twhere\n" +
+            "\t\t\trid in (\n" +
+            "\t\t\t\tselect rid from r_user \n" +
+            "\t\t\t\twhere uid=\n" +
+            "\t\t\t\t\t(select id from user where uname=#{param1})\n" +
+            "\t\t)\n" +
+            "\t)\n" +
+            ")")
+    List<String> selPsMapper(String pricipal);
+
+    List<User> selectAll();
+
+    int updateByPrimaryKey(User record);
 }
